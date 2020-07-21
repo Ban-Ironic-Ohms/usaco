@@ -1,5 +1,5 @@
 #open file and read lines
-file_in = open(r"C:\Users\Micah\Desktop\Personal\Python\usaco\Swapity Swap\1.in")
+file_in = open(r"C:\Users\Micah\Desktop\Personal\Python\usaco\Swapity Swap\5.in")
 
 metadata = file_in.readline()
 metadata = metadata.split()
@@ -18,6 +18,10 @@ while i <= n:
     cows.append(i)
     i += 1
 
+def fix(number):
+    number = number - .5
+    return number
+
 def swap(one, two, list):
     try:
         one = int(one)
@@ -28,13 +32,21 @@ def swap(one, two, list):
         print("Oh no! not a valid input")
         exit
 
-    first = list[one]
-    second = list[two]
+    sublist = list[one:(two + 1)]
+    switches = len(sublist)/2
+    if switches % 2 == 1:
+        switches = fix(switches)
+        switches -= 1
+    switches = int(switches)  
+    
+    for i in range(switches):
+        a = list[one + i]
+        b = list[two - i]
+        list[one + i] = b
+        list[two - i] = a
+    return list
 
-    list[one] = second
-    list[two] = first
 
-    print(cows)
 
 i = 1
 while i <= K:
@@ -42,7 +54,8 @@ while i <= K:
     b = swap1.split()[1] #5
     c = swap2.split()[0] #3
     d = swap2.split()[1] #7
-    swap(a, b, cows)
-    swap(c, d, cows)
+    cows = swap(a, b, cows)
+    cows = swap(c, d, cows)
     i += 1
 
+print(cows)
