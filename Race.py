@@ -42,8 +42,18 @@ def min_time(max_speed, race_length):
             speed += 1
             distance_traveled += speed
             time += 1
+        elif slow_down(speed, max_speed, distance_traveled, race_length) == False:
+            speed -= 1
+            distance_traveled += speed
+            time += 1
         if race_length - distance_traveled <= 0:
             done = True
     return(time)
 
-print(min_time(all_speeds[0], race_length))
+print(min_time(all_speeds[1], race_length))
+
+
+## OTHER THING ##
+# I could work backwards. Have a function that returns if we could get to a point at a speed by 'ranping up'
+# Then, take total distance and go TD-Max Speed, and start from that point
+# See the paper on desk
