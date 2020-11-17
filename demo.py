@@ -24,3 +24,8 @@ for i in elements:
             place.append(column)
         column += 1
 print(place)
+
+barn = []
+rock = []
+lake = []
+
